@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import fs from 'fs'
 const app = express();
 const port = 9999;
 const fs = require('fs');
