@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 })
 app.get('/create', async (req, res) => {
     let create = await usermodel.create({
-        username: 'ZiReoTriX',
+        username: "Gust",
         name: 'anshul',
         program: 'bsc.csit'
     })
@@ -16,10 +16,21 @@ app.get('/create', async (req, res) => {
 
 app.get('/update', async (req, res) => {
     let updatedUser = await usermodel.findOneAndUpdate(
-        { username: 'ZiReoTrix' },
-        { name: 'sushank' },
+        { username: "Gust" },
+        { name: "sushank" },
         { new: true })
     res.send(updatedUser);
+})
+
+
+app.get('/read', async (req, res) => {
+    let finduser = await usermodel.find()
+    res.send(finduser);
+})
+
+app.get('/delete',async (req, res) => {
+    let deleteuser =await usermodel.findOneAndDelete({ name: "sushank" })
+    res.send(deleteuser);
 })
 app.listen(port, () => {
     console.log(`express running at ${port}`);

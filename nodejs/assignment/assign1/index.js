@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.urlencoded({extended:true}))
 
 app.post('/',(req,res)=>{
-    res.redirect('/login.html')
+    res.redirect('/login')
 })
 
 app.post('/login.html',(req,res)=>{
@@ -16,7 +16,7 @@ app.post('/login.html',(req,res)=>{
     
     fs.appendFileSync('log.txt',data)
 
-    res.redirect('./registration.html')
+    res.redirect('./registration')
 })
 
 app.post('/registration.html',(req,res)=>{
@@ -25,7 +25,7 @@ app.post('/registration.html',(req,res)=>{
     
     fs.appendFileSync('registration.txt',resData)
 
-    res.redirect('./home.html')
+    res.redirect('./home')
 })
 
 app.listen(port,()=>{
