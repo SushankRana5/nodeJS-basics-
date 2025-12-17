@@ -7,6 +7,5 @@ const Schema=mongoose.Schema({
     name:String,
     program:String
 })
-
 const usermodel=mongoose.model('user',Schema)
 export default usermodel;
