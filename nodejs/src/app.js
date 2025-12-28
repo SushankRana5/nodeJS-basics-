@@ -12,12 +12,13 @@ import signup from './routes/signup.js';
 // Middlewares (ALWAYS FIRST)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('src/views'));
 
 // Routes with base paths
-app.use('/login', login);
-app.use('/signup', signup);
+app.use(login);
+app.use(signup);
 
-// Connect DB (CALL IT)
+// Connect DB
 dbconnect();
 
 app.listen(port, () => {

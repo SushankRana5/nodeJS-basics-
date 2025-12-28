@@ -1,5 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 
@@ -20,9 +20,12 @@ app.get('/', (req, res) => {
     console.log('3000');
 });
 
-app.get('/read',(req,res)=>{
-    const data=jwt.verify(req.cookies.token,'shhhh')
+app.get('/read', (req, res) => {
+    const data = jwt.verify(req.cookies.token, 'shhhh')
     console.log(data)
+})
+app.get('/tokens',(req,res)=>{
+    console.log(req.cookies.token)
 })
 
 app.listen(3000, () => {

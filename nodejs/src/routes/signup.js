@@ -1,27 +1,33 @@
-import express from 'express'
-import model from '../models/model.js'
-import bcrypt from 'bcrypt'
-import path from 'path'
+import express from 'express';
+import model from '../models/model.js';
+import bcrypt from 'bcrypt';
+import path from 'path';
 
-const __dirname = path.resolve()
-const signup = express();
+const router = express.Router();
+const __dirname = path.resolve();
 
-signup.use(express.urlencoded({ extended: true }))
+// POST route to handle signup form
+router.post('/', async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-signup.post('/signup', async (req, res) => {
-    const { username, password } = req.body;
+        // Check if user already exists
+        const existingUser = await model.findOne({ username });
+        if (existingUser) {
+            return res.send('User already exists. Try another username.');
+        }
 
-    const hash = await bcrypt.hash(password, 10);
-    const User = await model.findOne({ username });
-    if (User){
-        res.send('User already exists try another username')
+        // Hash password and create new user
+        const hash = await bcrypt.hash(password, 10);
+        await model.create({ username, password: hash });
+
+        // Redirect to login page after successful signup
+        res.redirect('/login');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
     }
-    await model.create({
-        username: username,
-        password: hash
-    });
-
-    res.sendFile(path.join(__dirname, 'login.html'))
 });
 
-export default signup;
+console.log('Signup router connected');
+export default router;

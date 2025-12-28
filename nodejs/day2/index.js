@@ -1,5 +1,6 @@
 console.log("Hello from day2/index.js");
 const os = require('node:os');
+import os from 'node:os'
 console.log(os.arch());
 console.log(os.freemem());
 console.log(os.totalmem());
